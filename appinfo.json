@@ -11,9 +11,13 @@
     },
     "sdkVersion": "3",
     "shortName": "MLBGameTracker",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
     "uuid": "3bc5446a-1316-4477-ac8d-715a6c7c4eb6",
     "versionLabel": "1.0",
     "watchapp": {
-        "watchface": false
+        "watchface": true
     }
 }
