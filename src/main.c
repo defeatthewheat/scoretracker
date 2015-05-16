@@ -7,6 +7,7 @@
 #include <pebble.h>
 
 static Window *s_main_window;
+static TextLayer *teams_layer;
 static TextLayer *time_layer;
 static TextLayer *battery_disp_layer;
 static char sys_battery_buff[16];
@@ -22,12 +23,7 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
   static char buffer[] = "00:00";
   strftime(buffer,sizeof("00:00"), "%H:%M", tick_time);
 	
-	//BatteryChargeState batt_percent = battery_state_service_peek();
-	//snprintf(sys_battery_buff, sizeof(sys_battery_buff), "%d%%", batt_percent.charge_percent);
-	//text_layer_set_text(battery_disp_layer, sys_battery_buff);
-	
-	
-    // Update the TextLayer
+  // Update the TextLayer
   text_layer_set_text(time_layer, buffer);
 
   // Increment s_uptime
@@ -36,7 +32,6 @@ static void tick_handler(struct tm *tick_time, TimeUnits units_changed) {
 
 //Handles battery percentages
 static void battery_handler(BatteryChargeState new_state) {
-  // Write to buffer and display
   static char sys_battery_buff[32];
   snprintf(sys_battery_buff, sizeof(sys_battery_buff), "%d%%", new_state.charge_percent);
   text_layer_set_text(battery_disp_layer, sys_battery_buff);
@@ -56,11 +51,22 @@ static void main_window_load(Window *window) {
 	battery_handler(battery_state_service_peek());
 	
 	// Create output TextLayer for time
-  time_layer = text_layer_create(GRect(0, 30, window_bounds.size.w, window_bounds.size.h));
+  time_layer = text_layer_create(GRect(0, 25, window_bounds.size.w, window_bounds.size.h));
   text_layer_set_text_alignment(time_layer, GTextAlignmentCenter);
 	text_layer_set_font(time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_LIGHT));
   layer_add_child(window_layer, text_layer_get_layer(time_layer));
+	
+	//output TextLayers for teams
+	
+	teams_layer = text_layer_create(GRect(0, 80, window_bounds.size.w, window_bounds.size.h));
+	text_layer_set_text_alignment(teams_layer, GTextAlignmentCenter);
+	text_layer_set_font(teams_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+	text_layer_set_text(teams_layer, "SAN v. CIN");
+	
+	layer_add_child(window_layer, text_layer_get_layer(teams_layer));
+	
 }
+
 
 static void main_window_unload(Window *window) {
   // Destroy output TextLayer
