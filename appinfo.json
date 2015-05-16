@@ -1,0 +1,19 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "kar@rrossinc.com",
+    "longName": "MLBGameTracker",
+    "projectType": "native",
+    "resources": {
+        "media": []
+    },
+    "sdkVersion": "3",
+    "shortName": "MLBGameTracker",
+    "uuid": "3bc5446a-1316-4477-ac8d-715a6c7c4eb6",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
