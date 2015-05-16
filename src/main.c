@@ -1,6 +1,7 @@
 /*
  * main.c
  * Sets up a Window and a TextLayer.
+ *MLB SCORE TRACKER
  */
 
 #include <pebble.h>
